@@ -1,19 +1,16 @@
 import { isEmail, isNotEmpty, isEqualToOtherValue, hasMinLength } from '../util/validation.js';
 import { useActionState } from 'react';
 
-export default function Signup() {
-  function signupAction(prevFormState, formData) {
-
+function signupAction(prevFormState, formData) {
     const email = formData.get('email');
     const password = formData.get('password');
     const firstName = formData.get('first-name');
     const lastName = formData.get('last-name');
-    //const phone = formData.get('phone');
     const confirmPassword = formData.get('confirm-password');
     const role = formData.get('role');
     const terms = formData.get('terms');
     const acquisitionChannel = formData.getAll('acquisition');
-    console.log('consts', role); 
+
     let errors = [];
 
     if (!isEmail(email)) {
@@ -46,7 +43,6 @@ export default function Signup() {
     }
 
     if (errors.length > 0) {
-      console.log('errors', role); 
       return {
         
         errors: errors, enteredValues: {
@@ -65,6 +61,11 @@ export default function Signup() {
     return { errors: null }
     
   }
+
+
+
+export default function Signup() {
+  
 
   const [formState, formAction] = useActionState(signupAction, { errors: null })
 
